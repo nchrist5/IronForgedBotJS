@@ -34,10 +34,10 @@ module.exports = {
 			"Agility": 3,
 			"Thieving": 1,
 			"Slayer": 3,
-			"Farming": 1,
-			"Runecrafting": 2,
-			"Hunter": 1,
-			"Construction": 3,
+			"Farming": 2,
+			"Runecrafting": 3,
+			"Hunter": 2,
+			"Construction": 2,
 		}
 		const post13mPointValues =
 		{
@@ -61,10 +61,10 @@ module.exports = {
 			"Agility": 30,
 			"Thieving": 10,
 			"Slayer": 30,
-			"Farming": 10,
+			"Farming": 20,
 			"Runecrafting": 30,
-			"Hunter": 10,
-			"Construction": 30,
+			"Hunter": 20,
+			"Construction": 20,
 		}
 		const minigames = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Barrows Chests", "Bryophyta", "Callisto", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
 		const minigameEHB = {
@@ -151,9 +151,9 @@ module.exports = {
 			"Alchemical Hydra": 2,
 			"Barrows Chests": 1,
 			"Bryophyta": 1,
-			"Callisto": 1,
+			"Callisto": 2,
 			"Cerberus": 1,
-			"Chambers of Xeric": 2,
+			"Chambers of Xeric": 2.8,
 			"Chambers of Xeric: Challenge Mode": 3,
 			"Chaos Elemental": 1,
 			"Chaos Fanatic": 1,
@@ -247,7 +247,7 @@ module.exports = {
 				} else if (totalPoints >= 9501 && totalPoints <= 12000) {
 					iconID = "Legend";
 				} else if (totalPoints > 1201) {
-					iconID = "Myth";
+					iconID = "Clan_icon__Myth";
 				}
 				const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);
 				interaction.reply(`\n${username} has ${totalPoints} points ${emoji}\nPoints from Skills: ${skillPoints}\nPoints from Minigames & Bossing: ${minigamePoints}`);
