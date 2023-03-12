@@ -231,23 +231,23 @@ module.exports = {
 				let totalPoints = skillPoints + minigamePoints;
 				let iconID = "";
 				if (totalPoints >= 0 && totalPoints <= 275) {
-					iconID = "Clan_icon__Sapphire";
+					iconID = "Sapphire";
 				} else if (totalPoints >= 276 && totalPoints <= 700) {
-					iconID = "Clan_icon__Emerald";
+					iconID = "Emerald";
 				} else if (totalPoints >= 701 && totalPoints <= 1400) {
-					iconID = "Clan_icon__Ruby";
+					iconID = "Ruby";
 				} else if (totalPoints >= 1401 && totalPoints <= 2500) {
-					iconID = "Clan_icon__Diamond";
+					iconID = "Diamond";
 				} else if (totalPoints >= 2501 && totalPoints <= 4000) {
-					iconID = "Clan_icon__Dragonstone";
+					iconID = "Dragonstone";
 				} else if (totalPoints >= 4001 && totalPoints <= 6500) {
-					iconID = "Clan_icon__Onyx";
+					iconID = "Onyx";
 				} else if (totalPoints >= 6501 && totalPoints <= 9500) {
-					iconID = "Clan_icon__Zenyte";
+					iconID = "Zenyte";
 				} else if (totalPoints >= 9501 && totalPoints <= 12000) {
-					iconID = "Clan_icon__Legend";
+					iconID = "Legend";
 				} else if (totalPoints > 1201) {
-					iconID = "Clan_icon__Myth";
+					iconID = "Myth";
 				}
 				const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);
 				interaction.reply(`\n${username} has ${totalPoints} points ${emoji}\nPoints from Skills: ${skillPoints}\nPoints from Minigames & Bossing: ${minigamePoints}`);

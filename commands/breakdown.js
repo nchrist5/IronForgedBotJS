@@ -233,26 +233,26 @@ module.exports = {
                 }
                 
                 const totalPoints = earnedSkillPoints + earnedMinigamePoints
-                let iconID = "";
-                if (totalPoints >= 0 && totalPoints <= 275) {
-                    iconID = "Clan_icon__Sapphire";
-                } else if (totalPoints >= 276 && totalPoints <= 700) {
-                    iconID = "Clan_icon__Emerald";
-                } else if (totalPoints >= 701 && totalPoints <= 1400) {
-                    iconID = "Clan_icon__Ruby";
-                } else if (totalPoints >= 1401 && totalPoints <= 2500) {
-                    iconID = "Clan_icon__Diamond";
-                } else if (totalPoints >= 2501 && totalPoints <= 4000) {
-                    iconID = "Clan_icon__Dragonstone";
-                } else if (totalPoints >= 4001 && totalPoints <= 6500) {
-                    iconID = "Clan_icon__Onyx";
-                } else if (totalPoints >= 6501 && totalPoints <= 9500) {
-                    iconID = "Clan_icon__Zenyte";
-                } else if (totalPoints >= 9501 && totalPoints <= 12000) {
-                    iconID = "Clan_icon__Legend";
-                } else if (totalPoints > 1201) {
-                    iconID = "Clan_icon__Myth";
-                }
+				let iconID = "";
+				if (totalPoints >= 0 && totalPoints <= 275) {
+					iconID = "Sapphire";
+				} else if (totalPoints >= 276 && totalPoints <= 700) {
+					iconID = "Emerald";
+				} else if (totalPoints >= 701 && totalPoints <= 1400) {
+					iconID = "Ruby";
+				} else if (totalPoints >= 1401 && totalPoints <= 2500) {
+					iconID = "Diamond";
+				} else if (totalPoints >= 2501 && totalPoints <= 4000) {
+					iconID = "Dragonstone";
+				} else if (totalPoints >= 4001 && totalPoints <= 6500) {
+					iconID = "Onyx";
+				} else if (totalPoints >= 6501 && totalPoints <= 9500) {
+					iconID = "Zenyte";
+				} else if (totalPoints >= 9501 && totalPoints <= 12000) {
+					iconID = "Legend";
+				} else if (totalPoints > 1201) {
+					iconID = "Myth";
+				}
                 const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);
                 
                 let skillPointsOutput = Object.entries(playerSkillsData)
