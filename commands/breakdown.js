@@ -13,61 +13,60 @@ module.exports = {
                 .setDescription('The player to get a breakdown')
                 .setRequired(true)),
     async execute(interaction) {
-        const skillList = ["Overall", "Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction",];
-		const pointValues = {
-			"Overall": 0,
-			"Attack": 1,
-			"Defence": 1,
-			"Strength": 1,
-			"Hitpoints": 1,
-			"Ranged": 1,
-			"Prayer": 3,
-			"Magic": 2,
-			"Cooking": 1,
-			"Woodcutting": 2,
-			"Fletching": 1,
-			"Fishing": 2,
-			"Firemaking": 1,
-			"Crafting": 3,
-			"Smithing": 2,
-			"Mining": 3,
-			"Herblore": 4,
-			"Agility": 3,
-			"Thieving": 1,
-			"Slayer": 3,
-			"Farming": 2,
-			"Runecrafting": 3,
-			"Hunter": 2,
-			"Construction": 2,
+        const skillList = ["Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction",];
+		//PRE-99 Points per EXP
+		const preMaxModifier = {
+			"Attack": 100000,
+			"Defence": 100000,
+			"Strength": 100000,
+			"Hitpoints": 100000,
+			"Ranged": 100000,
+			"Prayer": 33333,
+			"Magic": 50000,
+			"Cooking": 100000,
+			"Woodcutting": 50000,
+			"Fletching": 100000,
+			"Fishing": 50000,
+			"Firemaking": 100000,
+			"Crafting": 33333,
+			"Smithing": 50000,
+			"Mining": 33333,
+			"Herblore": 25000,
+			"Agility": 33333,
+			"Thieving": 100000,
+			"Slayer": 33333,
+			"Farming": 50000,
+			"Runecraft": 33333,
+			"Hunter": 50000,
+			"Construction": 50000,
 		}
-		const post13mPointValues =
-		{
-			"Overall": 0,
-			"Attack": 3,
-			"Defence": 3,
-			"Strength": 3,
-			"Hitpoints": 3,
-			"Ranged": 3,
-			"Prayer": 9,
-			"Magic": 6,
-			"Cooking": 10,
-			"Woodcutting": 20,
-			"Fletching": 10,
-			"Fishing": 20,
-			"Firemaking": 10,
-			"Crafting": 30,
-			"Smithing": 20,
-			"Mining": 30,
-			"Herblore": 40,
-			"Agility": 30,
-			"Thieving": 10,
-			"Slayer": 30,
-			"Farming": 20,
-			"Runecrafting": 30,
-			"Hunter": 20,
-			"Construction": 20,
-		}
-		const minigames = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Barrows Chests", "Bryophyta", "Callisto", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
+		//POST-99 Points per EXP
+		const postMaxModifer = {
+			"Attack": 333333,
+			"Defence": 333333,
+			"Strength": 333333,
+			"Hitpoints": 333333,
+			"Ranged": 333333,
+			"Prayer": 111111,
+			"Magic": 166666,
+			"Cooking": 100000,
+			"Woodcutting": 50000,
+			"Fletching": 100000,
+			"Fishing": 50000,
+			"Firemaking": 100000,
+			"Crafting": 33333,
+			"Smithing": 50000,
+			"Mining": 33333,
+			"Herblore": 25000,
+			"Agility": 33333,
+			"Thieving": 100000,
+			"Slayer": 33333,
+			"Farming": 50000,
+			"Runecraft": 33333,
+			"Hunter": 50000,
+			"Construction": 50000,
+		}		
+		const minigameList = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Barrows Chests", "Bryophyta", "Callisto", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
 		const minigameEHB = {
 			"Bounty Hunter - Hunter": 1,
 			"Bounty Hunter - Rogue": 1,
@@ -203,36 +202,36 @@ module.exports = {
         const username = interaction.options.getString("player");
         axios.get(`https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=${username}`)
             .then(res => {
-                const jagexPayload = res.data.split('\n');
-                const playerSkillsData = {};
-                let earnedSkillPoints = 0;
-                for (let i = 0; i < skillList.length; i++) {
-                    let skillName = skillList[i];
-                    let playerXPdata = jagexPayload[i].split(',');
-                    let xp = parseInt(playerXPdata[2]);
-                    if (pointValues.hasOwnProperty(skillName) && !isNaN(xp) && xp > 0) {
-                        if (xp < 13034431) {
-                            playerSkillsData[skillName] = Math.floor(xp / 100000) * pointValues[skillName];
-                        } else {
-                            playerSkillsData[skillName] = (Math.floor(13034431 / 100000) * pointValues[skillName]) + (Math.floor((xp - 13034431) / 1000000) * post13mPointValues[skillName]);
-                        }
-                        earnedSkillPoints += playerSkillsData[skillName];
-                    }
-                }
+                const jagexPayload = res.data.split('\n').slice(1,-1);
+                let playerSkillsData = {};
+				let skillPoints = 0;
+				for (let i = 0; i < skillList.length; i++) {
+					let skill = skillList[i];
+					const playerXPdata = jagexPayload[i].split(',');
+					let xp = parseInt(playerXPdata[2]);
+					if (!isNaN(xp) && xp >= 0) {
+						if (xp < 13034431) {
+							playerSkillsData[skill] = Math.floor(xp / preMaxModifier[skill]);
+						} else {
+							playerSkillsData[skill] = Math.floor(13034431 / preMaxModifier[skill]) + Math.floor((xp - 13034431) / postMaxModifer[skill]);
+						}
+                        skillPoints += playerSkillsData[skill];
+					}
+				}
 
-                const playerMinigameData = {};
-                let earnedMinigamePoints = 0;
+                let playerMinigameData = {};
+                let minigamePoints = 0;
                 for (let i = 0; i < minigameList.length; i++) {
-                    let minigameName = minigameList[i];
-                    let playerKCdata = jagexPayload[25 + i].split(',');
-                    let kc = playerKCdata[1];
+                    const minigameName = minigameList[i];
+                    const playerKCdata = jagexPayload[skillList.length + 1 + i].split(',');
+                    const kc = playerKCdata[1];
                     if (minigameEHB.hasOwnProperty(minigameName) && !isNaN(kc) && kc * minigameDifficulty[minigameName] > 0) {
                         playerMinigameData[minigameName] = Math.floor((kc / minigameEHB[minigameName]) * minigameDifficulty[minigameName]);
-                        earnedMinigamePoints += playerMinigameData[minigameName];
+                        minigamePoints += playerMinigameData[minigameName];
                     }
                 }
                 
-                const totalPoints = earnedSkillPoints + earnedMinigamePoints
+                const totalPoints = skillPoints + minigamePoints;
 				let iconID = "";
 				if (totalPoints >= 0 && totalPoints <= 275) {
 					iconID = "Sapphire";
@@ -263,8 +262,8 @@ module.exports = {
                     .map(([key, value]) => `${key} : ${value}\n`)
                     .join('');
 
-                let breakdownOutput = `Points from Skills:\n${skillPointsOutput}\n\nPoints from Minigames & Bossing:\n${minigameOutput}`;
-
+                let breakdownOutput = `---Points from Skills---\n${skillPointsOutput}Total Skill Points: ${skillPoints}\n\n---Points from Minigames & Bossing---\n${minigameOutput}Total Minigame & Bossing Points: ${minigamePoints}\n\nTotal Points: ${totalPoints}`;
+                
                 fs.writeFile("./output_files/breakdown.txt", breakdownOutput, function (err) {
                     if (err) {
                         console.log(err);

@@ -12,60 +12,59 @@ module.exports = {
 				.setDescription('The player to rank')
 				.setRequired(true)),
 	async execute(interaction) {
-		const skills = ["Overall", "Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction",];
-		const pointValues = {
-			"Overall": 0,
-			"Attack": 1,
-			"Defence": 1,
-			"Strength": 1,
-			"Hitpoints": 1,
-			"Ranged": 1,
-			"Prayer": 3,
-			"Magic": 2,
-			"Cooking": 1,
-			"Woodcutting": 2,
-			"Fletching": 1,
-			"Fishing": 2,
-			"Firemaking": 1,
-			"Crafting": 3,
-			"Smithing": 2,
-			"Mining": 3,
-			"Herblore": 4,
-			"Agility": 3,
-			"Thieving": 1,
-			"Slayer": 3,
-			"Farming": 2,
-			"Runecrafting": 3,
-			"Hunter": 2,
-			"Construction": 2,
+		const skillList = ["Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction",];
+		//PRE-99 Points per EXP
+		const preMaxModifier = {
+			"Attack": 100000,
+			"Defence": 100000,
+			"Strength": 100000,
+			"Hitpoints": 100000,
+			"Ranged": 100000,
+			"Prayer": 33333,
+			"Magic": 50000,
+			"Cooking": 100000,
+			"Woodcutting": 50000,
+			"Fletching": 100000,
+			"Fishing": 50000,
+			"Firemaking": 100000,
+			"Crafting": 33333,
+			"Smithing": 50000,
+			"Mining": 33333,
+			"Herblore": 25000,
+			"Agility": 33333,
+			"Thieving": 100000,
+			"Slayer": 33333,
+			"Farming": 50000,
+			"Runecraft": 33333,
+			"Hunter": 50000,
+			"Construction": 50000,
 		}
-		const post13mPointValues =
-		{
-			"Overall": 0,
-			"Attack": 3,
-			"Defence": 3,
-			"Strength": 3,
-			"Hitpoints": 3,
-			"Ranged": 3,
-			"Prayer": 9,
-			"Magic": 6,
-			"Cooking": 10,
-			"Woodcutting": 20,
-			"Fletching": 10,
-			"Fishing": 20,
-			"Firemaking": 10,
-			"Crafting": 30,
-			"Smithing": 20,
-			"Mining": 30,
-			"Herblore": 40,
-			"Agility": 30,
-			"Thieving": 10,
-			"Slayer": 30,
-			"Farming": 20,
-			"Runecrafting": 30,
-			"Hunter": 20,
-			"Construction": 20,
-		}
+		//POST-99 Points per EXP
+		const postMaxModifer = {
+			"Attack": 333333,
+			"Defence": 333333,
+			"Strength": 333333,
+			"Hitpoints": 333333,
+			"Ranged": 333333,
+			"Prayer": 111111,
+			"Magic": 166666,
+			"Cooking": 100000,
+			"Woodcutting": 50000,
+			"Fletching": 100000,
+			"Fishing": 50000,
+			"Firemaking": 100000,
+			"Crafting": 33333,
+			"Smithing": 50000,
+			"Mining": 33333,
+			"Herblore": 25000,
+			"Agility": 33333,
+			"Thieving": 100000,
+			"Slayer": 33333,
+			"Farming": 50000,
+			"Runecraft": 33333,
+			"Hunter": 50000,
+			"Construction": 50000,
+		}		
 		const minigames = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Barrows Chests", "Bryophyta", "Callisto", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
 		const minigameEHB = {
 			"Bounty Hunter - Hunter": 1,
@@ -202,33 +201,32 @@ module.exports = {
 		const username = interaction.options.getString("player");
 		axios.get(`https://secure.runescape.com/m=hiscore_oldschool/index_lite.ws?player=${username}`)
 			.then(res => {
-				const data = res.data.split('\n');
+				const jagexPayload = res.data.split('\n').slice(1,-1);
 				let skillPoints = 0;
-				for (let i = 0; i < skills.length; i++) {
-					const skill = skills[i];
-					const skillData = data[i].split(',');
+				for (let i = 0; i < skillList.length; i++) {
+					let skill = skillList[i];
+					const skillData = jagexPayload[i].split(',');
 					let xp = parseInt(skillData[2]);
-					if (pointValues.hasOwnProperty(skill) && !isNaN(xp) && xp >= 0) {
+					if (!isNaN(xp) && xp >= 0) {
 						if (xp < 13034431) {
-							skillPoints += Math.floor(xp / 100000) * pointValues[skill];
+							skillPoints += Math.floor(xp / preMaxModifier[skill]);
 						} else {
-							skillPoints += (Math.floor(13034431 / 100000) * pointValues[skill]) + (Math.floor((xp - 13034431) / 1000000) * post13mPointValues[skill]);
+							skillPoints += Math.floor(13034431 / preMaxModifier[skill]) + Math.floor((xp - 13034431) / postMaxModifer[skill]);
 						}
 					}
 				}
 
 				let minigamePoints = 0;
-				const minigameStartIndex = skills.length + 1;
 				for (let j = 0; j < minigames.length; j++) {
 					const minigame = minigames[j];
-					const minigameData = data[minigameStartIndex + j].split(',');
+					const minigameData = jagexPayload[skillList.length + 1 + j].split(',');
 					const minigameScore = minigameData[1];
 					if (minigameEHB.hasOwnProperty(minigame) && !isNaN(minigameScore) && minigameScore >= 0) {
 						minigamePoints += Math.floor((minigameScore / minigameEHB[minigame]) * minigameDifficulty[minigame]);
 					}
 				}
 				console.log(username)
-				let totalPoints = skillPoints + minigamePoints;
+				const totalPoints = skillPoints + minigamePoints;
 				let iconID = "";
 				if (totalPoints >= 0 && totalPoints <= 275) {
 					iconID = "Sapphire";
