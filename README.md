@@ -1,7 +1,7 @@
 # IronLandBotJS
 JS Code for Iron Land Bot 3.0
-  - Written Mythologies and Noodlebonk
-  - Revised by Mythologies into current version (3.0)
+  - Written Mythologies and ChatGPT
+  - Revised into semi-readable code and not complete spaghetti by Noodlebonk
 
 
 Requires .env file containing:
@@ -11,6 +11,9 @@ guildid=<server ID>
 TOKEN=<bot token>
 
 
-To Run: npm start
+Install (Node/NPM required):
+  - npm install
+  - node deploy-commands.js
 
-If first run: node deploy-commands.js
+Run:
+  - npm start
