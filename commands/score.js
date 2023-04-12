@@ -231,7 +231,7 @@ module.exports = {
 						minigamePoints += Math.floor((minigameScore / minigameEHB[minigame]) * minigameDifficulty[minigame]);
 					}
 				}
-				console.log(username + " - score")
+				console.log(username + " - score");
 				const totalPoints = skillPoints + minigamePoints;
 				let iconID = "";
 				if (totalPoints >= 0 && totalPoints <= 275) {
