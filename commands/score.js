@@ -65,7 +65,7 @@ module.exports = {
 			"Hunter": 50000,
 			"Construction": 50000,
 		}		
-		const minigames = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Barrows Chests", "Bryophyta", "Callisto", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
+		const minigameList = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Artio", "Barrows Chests", "Bryophyta", "Callisto", "Cal'varion", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Spindel", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
 		const minigameEHB = {
 			"Bounty Hunter - Hunter": 1,
 			"Bounty Hunter - Rogue": 1,
@@ -82,9 +82,11 @@ module.exports = {
 			"Rifts closed": 7,
 			"Abyssal Sire": 32,
 			"Alchemical Hydra": 26,
+			"Artio": 0,
 			"Barrows Chests": 18,
 			"Bryophyta": 3,
 			"Callisto": 30,
+			"Cal'varion": 0,
 			"Cerberus": 54,
 			"Chambers of Xeric": 2.8,
 			"Chambers of Xeric: Challenge Mode": 2,
@@ -115,6 +117,7 @@ module.exports = {
 			"Sarachnis": 56,
 			"Scorpia": 60,
 			"Skotizo": 0.8,
+			"Spindel": 0,
 			"Tempoross": 7,
 			"The Gauntlet": 10,
 			"The Corrupted Gauntlet": 6.5,
@@ -148,9 +151,11 @@ module.exports = {
 			"Rifts closed": 1,
 			"Abyssal Sire": 2,
 			"Alchemical Hydra": 2,
+			"Artio": 0,
 			"Barrows Chests": 1,
 			"Bryophyta": 1,
 			"Callisto": 2,
+			"Cal'varion": 0,
 			"Cerberus": 1,
 			"Chambers of Xeric": 2.8,
 			"Chambers of Xeric: Challenge Mode": 3,
@@ -181,6 +186,7 @@ module.exports = {
 			"Sarachnis": 1,
 			"Scorpia": 2,
 			"Skotizo": 2,
+			"Spindel": 0,
 			"Tempoross": 1,
 			"The Gauntlet": 1,
 			"The Corrupted Gauntlet": 2,
@@ -225,7 +231,7 @@ module.exports = {
 						minigamePoints += Math.floor((minigameScore / minigameEHB[minigame]) * minigameDifficulty[minigame]);
 					}
 				}
-				console.log(username)
+				console.log(username + " - score")
 				const totalPoints = skillPoints + minigamePoints;
 				let iconID = "";
 				if (totalPoints >= 0 && totalPoints <= 275) {
