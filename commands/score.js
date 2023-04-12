@@ -223,8 +223,8 @@ module.exports = {
 				}
 
 				let minigamePoints = 0;
-				for (let j = 0; j < minigames.length; j++) {
-					const minigame = minigames[j];
+				for (let j = 0; j < minigameList.length; j++) {
+					const minigame = minigameList[j];
 					const minigameData = jagexPayload[skillList.length + 1 + j].split(',');
 					const minigameScore = minigameData[1];
 					if (minigameEHB.hasOwnProperty(minigame) && !isNaN(minigameScore) && minigameScore >= 0) {
