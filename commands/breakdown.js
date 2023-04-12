@@ -272,7 +272,8 @@ module.exports = {
                 
                 fs.writeFile("./output_files/breakdown.txt", breakdownOutput, function (err) {
                     if (err) {
-                        console.log(err);
+						interaction.reply('Error: Invalid username or player not found.');
+                        console.log("Breakdown called on " + username + ". Received error:\n" + err);
                     } else {
                         console.log(username + " - breakdown");
                         interaction.reply({

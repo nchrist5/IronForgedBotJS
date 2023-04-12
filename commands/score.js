@@ -258,6 +258,7 @@ module.exports = {
 			})
 			.catch(err => {
 				interaction.reply('Error: Invalid username or player not found.');
+				console.log("Score called on " + username + ". Received error:\n" + err);
 			});
 	}
 }
