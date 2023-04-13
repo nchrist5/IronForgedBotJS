@@ -12,7 +12,7 @@ module.exports = {
 				.setDescription('The player to rank')
 				.setRequired(true)),
 	async execute(interaction) {
-		const skillList = ["Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction",];
+		const skillList = ["Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction"];
 		//PRE-99 Points per EXP
 		const preMaxModifier = {
 			"Attack": 100000,
@@ -65,7 +65,7 @@ module.exports = {
 			"Hunter": 50000,
 			"Construction": 50000,
 		}		
-		const minigameList = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Artio", "Barrows Chests", "Bryophyta", "Callisto", "Cal'varion", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Spindel", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
+		const minigameList = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Artio", "Barrows Chests", "Bryophyta", "Callisto", "Calvar'ion", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Spindel", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"]
 		const minigameEHB = {
 			"Bounty Hunter - Hunter": 1,
 			"Bounty Hunter - Rogue": 1,
@@ -86,7 +86,7 @@ module.exports = {
 			"Barrows Chests": 18,
 			"Bryophyta": 3,
 			"Callisto": 30,
-			"Cal'varion": 0,
+			"Calvar'ion": 0,
 			"Cerberus": 54,
 			"Chambers of Xeric": 2.8,
 			"Chambers of Xeric: Challenge Mode": 2,
@@ -155,7 +155,7 @@ module.exports = {
 			"Barrows Chests": 1,
 			"Bryophyta": 1,
 			"Callisto": 2,
-			"Cal'varion": 0,
+			"Calvar'ion": 0,
 			"Cerberus": 1,
 			"Chambers of Xeric": 2.8,
 			"Chambers of Xeric: Challenge Mode": 3,
@@ -222,15 +222,16 @@ module.exports = {
 					}
 				}
 
-				let minigamePoints = 0;
-				for (let j = 0; j < minigameList.length; j++) {
-					const minigame = minigameList[j];
-					const minigameData = jagexPayload[skillList.length + 1 + j].split(',');
-					const minigameScore = minigameData[1];
-					if (minigameEHB.hasOwnProperty(minigame) && !isNaN(minigameScore) && minigameScore >= 0) {
-						minigamePoints += Math.floor((minigameScore / minigameEHB[minigame]) * minigameDifficulty[minigame]);
-					}
-				}
+                let minigamePoints = 0;
+                for (let i = 0; i < minigameList.length; i++) {
+                    const minigameName = minigameList[i];
+                    const playerKCdata = jagexPayload[skillList.length + 1 + i].split(',');
+                    const kc = playerKCdata[1];
+                    if (minigameEHB.hasOwnProperty(minigameName) && !isNaN(kc) && kc * minigameDifficulty[minigameName] > 0) {
+                        minigamePoints += Math.floor((kc / minigameEHB[minigameName]) * minigameDifficulty[minigameName]);
+                    }
+                }
+
 				console.log(username + " - score");
 				const totalPoints = skillPoints + minigamePoints;
 				let iconID = "";
@@ -250,7 +251,7 @@ module.exports = {
 					iconID = "Zenyte";
 				} else if (totalPoints >= 9501 && totalPoints <= 12000) {
 					iconID = "Legend";
-				} else if (totalPoints > 1201) {
+				} else if (totalPoints > 1200) {
 					iconID = "Clan_icon__Myth";
 				}
 				const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);
