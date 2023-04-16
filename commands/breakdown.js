@@ -278,8 +278,7 @@ module.exports = {
                         console.log(username + " - breakdown");
                         interaction.reply({
                             files : ['./output_files/breakdown.txt'],
-                            content: `\n\n${username}'s Total Points:  ${totalPoints}  ${emoji}`, 
-                            ephemeral: true
+                            content: `\n\n${username}'s Total Points:  ${totalPoints}  ${emoji}`
                         });
                     }
                 });
