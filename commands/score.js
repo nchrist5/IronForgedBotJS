@@ -255,10 +255,10 @@ module.exports = {
 					iconID = "Clan_icon__Myth";
 				}
 				const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);
-				interaction.reply(`\n${username} has ${totalPoints} points ${emoji}\nPoints from Skills: ${skillPoints}\nPoints from Minigames & Bossing: ${minigamePoints}`);
+				interaction.editReply(`\n${username} has ${totalPoints} points ${emoji}\nPoints from Skills: ${skillPoints}\nPoints from Minigames & Bossing: ${minigamePoints}`);
 			})
 			.catch(err => {
-				interaction.reply('Error: Invalid username or player not found.');
+				interaction.editReply('Error: Invalid username or player not found.');
 				console.log("Score called on " + username + ". Received error:\n" + err);
 			});
 	}

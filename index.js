@@ -1,13 +1,15 @@
 // Require the necessary discord.js classes
 const fs = require('node:fs');
-const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 const path = require('node:path');
+const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const syncServerMembersWithSheet = require('./syncMembers');
+
 const dotenv = require('dotenv');
 dotenv.config();
 const token = process.env.token;
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers] });
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -28,17 +30,27 @@ client.once(Events.ClientReady, c => {
 
 });
 client.on(Events.InteractionCreate, async interaction => {
+
     if (!interaction.isChatInputCommand()) return;
-
+    console.log(`Received command: ${interaction.commandName}`);
+  
     const command = client.commands.get(interaction.commandName);
-
-    if (!command) return;
+  
+    if (!command) {
+      console.log(`Command not found: ${interaction.commandName}`);
+      console.log("Registered commands:", client.commands.keys());
+      return;
+    }
 
     try {
+        await interaction.deferReply();
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+        await interaction.editReply({ content: 'There was an error while executing this command!', ephemeral: true });
     }
+
+    //sync members to spreadsheet
+    await syncServerMembersWithSheet(interaction.guild);
 });
 client.login(token)
