@@ -17,7 +17,6 @@ module.exports = {
   async execute(interaction) {
     const hasPermission = await checkPermissions(interaction.member);
     if (hasPermission) {
-      console.log(checkPermissions(interaction.member));
 
       const playerName = interaction.options.getString('player');
       const ingotsToAdd = interaction.options.getInteger('ingots');

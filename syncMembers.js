@@ -21,7 +21,7 @@ async function syncServerMembersWithSheet(guild) {
 
   await guild.members.fetch();
   const validMembers = guild.members.cache
-    .filter((member) => /^[a-z0-9_ ]+$/i.test(member.nickname || member.user.username))
+    .filter((member) => /^[a-z0-9_ -]+$/i.test(member.nickname || member.user.username))
     .map((member) => (member.nickname || member.user.username).toLowerCase());
   
   const rowsToDelete = [];
