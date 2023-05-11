@@ -23,7 +23,7 @@ async function createSheetsClient() {
 
 //THROTTLE SETUP//
 const maxOperationsPerMinute = 100;
-const interval = (60 / maxOperationsPerMinute) * 1000; //interval based on maxOperationsPerMinute ~1.67 op/sec
+const interval = (maxOperationsPerMinute / 60) * 1000; //interval based on maxOperationsPerMinute ~1.67 op/sec
 const requestQueue = [];
 let isProcessingQueue = false;
 
