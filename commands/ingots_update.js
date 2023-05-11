@@ -29,7 +29,8 @@ module.exports = {
         const previousIngots = parseInt(cellInfo.value);
         const updateSuccess = await updateCellValue(sheets, 'B', cellInfo.rowIndex, newIngots);
         if (updateSuccess) {
-          await logChange(sheets, playerName, previousIngots, newIngots, interaction.user.username);
+          const cmdCallingUser = await interaction.guild.members.fetch(interaction.user.id);
+          await logChange(sheets, playerName, previousIngots, newIngots, cmdCallingUser.nickname);
           await interaction.editReply(`Updated ${playerName}'s ingots to ${newIngots}.\n(Previous Value: ${previousIngots})`);
         }
       } else {

@@ -115,10 +115,10 @@ async function appendRow(sheets, range, values) {
         values: values,
       },
     });
-    return true; // Indicate success
+      return true;
   } catch (error) {
-    console.error(`Error appending row: ${error}`);
-    return false; // Indicate failure
+      console.error(`Error appending row: ${error}`);
+      return false;
   }
 }
 
@@ -179,10 +179,10 @@ async function deleteRows(sheets, sheetName, rowIndices) {
             requests: requests,
           },
         });
-        resolve(true);
+          resolve(true);
       } catch (error) {
-        console.error('Error deleting rows:', error);
-        reject(false);
+          console.error('Error deleting rows:', error);
+          reject(false);
       }
     });
   });
@@ -262,10 +262,10 @@ async function logChange(sheets, playerName, ingotsPrevious, ingotsNew, updatedB
           insertDataOption: 'INSERT_ROWS',
           resource: changeLogRow,
         });
-        resolve(true);
+          resolve(true);
       } catch (error) {
-        console.error('Error logging change:', error);
-        reject(false);
+          console.error('Error logging change:', error);
+          reject(false);
       }
     });
   });

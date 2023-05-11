@@ -37,7 +37,7 @@ async function syncServerMembersWithSheet(guild) {
 
       console.log(`Removed ${name} from the sheet (member left server).`);
 
-      await logChange(sheets, rowData[0], rowData[1], 0, 'UserLeftDiscordServer');
+      await logChange(sheets, rowData[0], rowData[1], 0, 'User Left Server');
     }
   }
 
@@ -63,7 +63,7 @@ async function syncServerMembersWithSheet(guild) {
 
       // If the append was successful, log the addition
       if (appendSuccess) {
-        await logChange(sheets, username, 0, 0, 'UserAddedToDiscordServer');
+        await logChange(sheets, username, 0, 0, 'User Joined Server');
         console.log(`Added ${username} to the sheet.`);
       }
     }
