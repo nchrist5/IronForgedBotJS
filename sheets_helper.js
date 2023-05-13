@@ -243,7 +243,15 @@ async function logChange(sheets, playerName, ingotsPrevious, ingotsNew, updatedB
 
   const timeZone = 'America/New_York';
   const estDate = new Date(currentTime.toLocaleString('en-US', { timeZone }));
-  const timestamp = estDate.toLocaleString('en-US');
+  const timestamp = estDate.toLocaleString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  });
 
   const changeLogRange = 'ChangeLog!A:E';
   const changeLogRow = {
