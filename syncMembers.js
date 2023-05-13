@@ -56,7 +56,7 @@ async function syncServerMembersWithSheet(guild) {
   const updatedExistingNames = updatedSearchResponse.data.values?.slice(1).map(row => row[0].toLowerCase()); //exclude header row, convert to lowercase
 
   for (const username of validMembers) {
-    if (!existingNames.includes(username)) {
+    if (!updatedExistingNames.includes(username)) {
       // Add the user to the sheet and check for success
       const appendRange = 'ClanIngots!A:B';
       const appendSuccess = await appendRow(sheets, appendRange, [[username, 0]]);
