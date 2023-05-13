@@ -255,7 +255,7 @@ module.exports = {
 					iconID = "Zenyte";
 				} else if (totalPoints >= 9501 && totalPoints <= 12000) {
 					iconID = "Legend";
-				} else if (totalPoints > 1201) {
+				} else if (totalPoints > 12000) {
 					iconID = "Myth";
 				}
                 const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);

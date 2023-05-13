@@ -1,13 +1,13 @@
 {
-  "name": "iron-land-bot-3.0",
+  "name": "ironforgedbot",
   "version": "3.0.0",
-  "description": "Iron Land Bot",
+  "description": "Iron Forged Bot",
   "main": "index.js",
   "scripts": {
     "start": "pm2 start index.js --watch NODE_OPTIONS=--experimental-vm-modules",
     "stop": "pm2 stop index.js"
   },
-  "author": "Mythologies",
+  "author": "Noodlebonk",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.2.3",

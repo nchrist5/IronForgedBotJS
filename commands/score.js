@@ -251,8 +251,8 @@ module.exports = {
 					iconID = "Zenyte";
 				} else if (totalPoints >= 9501 && totalPoints <= 12000) {
 					iconID = "Legend";
-				} else if (totalPoints > 1200) {
-					iconID = "Clan_icon__Myth";
+				} else if (totalPoints > 12000) {
+					iconID = "Myth";
 				}
 				const emoji = interaction.guild.emojis.cache.find(emoji => emoji.name === iconID);
 				interaction.editReply(`\n${username} has ${totalPoints} points ${emoji}\nPoints from Skills: ${skillPoints}\nPoints from Minigames & Bossing: ${minigamePoints}`);

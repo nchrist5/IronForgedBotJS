@@ -30,7 +30,7 @@ module.exports = {
       if (cellInfo.value && updateSuccess) {
         const cmdCallingUser = await interaction.guild.members.fetch(interaction.user.id);
         await logChange(sheets, playerName, parseInt(cellInfo.value), newIngots, cmdCallingUser.nickname );
-        await interaction.editReply(`Added ${ingotsToAdd} ingots to ${playerName}. They now have ${newIngots} ingots.`);
+        await interaction.editReply(`Added ${ingotsToAdd} ingots to ${playerName}. They now have ${newIngots} ingots :ingot:`);
       } else {
         await interaction.editReply(`No data found for player: ${playerName}.`);
       }
