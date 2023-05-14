@@ -68,7 +68,7 @@ async function syncServerMembersWithSheet(guild) {
   for (const member of validMembers.values()) {
     const existsInSheet = existingMembers.some((row) => row[2] === member.id);
     if (!existsInSheet) {
-      const nickname = member.nickname || member.user.username;
+      const nickname = member.nickname.toLowerCase() || member.user.username.toLowerCase();
       const appendRange = 'ClanIngots!A:C';
       const appendSuccess = await appendRow(sheets, appendRange, [[nickname, 0, member.id]]);
 
