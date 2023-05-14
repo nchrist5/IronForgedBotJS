@@ -22,8 +22,8 @@ async function createSheetsClient() {
 }
 
 //THROTTLE SETUP//
-const maxOperationsPerMinute = 100;
-const interval = (maxOperationsPerMinute / 60) * 1000; //interval based on maxOperationsPerMinute ~1.67 op/sec
+const maxOperationsPerMinute = 90;
+const interval = (maxOperationsPerMinute / 60) * 1000; //interval based on maxOperationsPerMinute ~1.5 op/sec
 const requestQueue = [];
 let isProcessingQueue = false;
 
@@ -239,19 +239,8 @@ async function sortSheet(sheets, sheetName, sortDimensonIndex, sortOrder = 'asce
 
 //write ingot changes to ChangeLog sheet
 async function logChange(sheets, playerName, ingotsPrevious, ingotsNew, updatedBy) {
-  const currentTime = new Date();
 
-  const timeZone = 'America/New_York';
-  const estDate = new Date(currentTime.toLocaleString('en-US', { timeZone }));
-  const timestamp = estDate.toLocaleString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  });
+  const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York', hour12: false });
 
   const changeLogRange = 'ChangeLog!A:E';
   const changeLogRow = {

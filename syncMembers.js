@@ -1,73 +1,85 @@
-const { createSheetsClient, appendRow, logChange, deleteRows, sortSheet } = require('./sheets_helper');
+const { createSheetsClient, logChange, deleteRows, updateCellValue, appendRow, sortSheet } = require('./sheets_helper');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const SHEET_ID = process.env.SHEET_ID;
 
 async function syncServerMembersWithSheet(guild) {
-
   const sheets = await createSheetsClient();
 
   await sortSheet(sheets, 'ClanIngots', 0, 'ascending');
   await sortSheet(sheets, 'ChangeLog', 1, 'descending');
-  
-  const searchRange = 'ClanIngots!A:B';
+
+  const searchRange = 'ClanIngots!A:C';
   const searchResponse = await sheets.spreadsheets.values.get({
     spreadsheetId: SHEET_ID,
     range: searchRange,
   });
 
-  const existingNames = searchResponse.data.values?.slice(1).map(row => row[0].toLowerCase()); //exclude header row, convert to lowercase
+  const existingMembers = searchResponse.data.values?.slice(1); //exclude header row
 
   await guild.members.fetch();
-  const validMembers = guild.members.cache
-    .filter((member) => /^[a-z0-9_ -]+$/i.test(member.nickname || member.user.username))
-    .map((member) => (member.nickname || member.user.username).toLowerCase());
-  
+  const validMembers = guild.members.cache.filter((member) => {
+    const hasValidNickname = /^[a-z0-9_ -]+$/i.test(member.nickname || member.user.username);
+    const hasMemberRole = member.roles.cache.some((role) => role.name === 'Member');
+    return hasValidNickname && hasMemberRole;
+  });
+
   const rowsToDelete = [];
 
-  for (const [index, name] of existingNames.entries()) {
-    const member = validMembers.find((m) => m === name);
+  for (const [index, row] of existingMembers.entries()) {
+    const member = validMembers.find((m) => m.id === row[2]);
     if (!member) {
       const rowIndex = index + 1; //skip first row (header row)
       rowsToDelete.push(rowIndex);
+    } else {
+      const currentNickname = member.nickname ? member.nickname.toLowerCase() : member.user.username.toLowerCase();
 
-      //store the row data before deleting to write to changelog
-      const rowData = searchResponse.data.values[rowIndex];
-
-      console.log(`Removed ${name} from the sheet (member left server).`);
-
-      await logChange(sheets, rowData[0], rowData[1], 0, 'User Left Server');
-    }
+      if (currentNickname.toLowerCase() !== row[0].toLowerCase()) {
+        const rowIndex = index + 1; // Adjust index by +1 to account for header row
+        try {
+          const updateSuccess = await updateCellValue(sheets, 'A', rowIndex, currentNickname);
+          if (updateSuccess) {
+            console.log(`Updated ${row[0]} to ${currentNickname} in the sheet.`);
+            await logChange(sheets, row[0], row[0], currentNickname, 'Name Change');
+          }
+        } catch (error) {
+          console.error(`Error updating nickname for ${row[0]}:`, error);
+        }
+      }
+    }      
   }
 
   rowsToDelete.sort((a, b) => b - a);
 
   if (rowsToDelete.length > 0) {
     //delete rows of members who left the server
-    await deleteRows(sheets, 'ClanIngots', rowsToDelete, existingNames);
-  }
+    const deleteResult = await deleteRows(sheets, 'ClanIngots', rowsToDelete);
 
-  // Refresh the existing names after deletion
-  const updatedSearchResponse = await sheets.spreadsheets.values.get({
-    spreadsheetId: SHEET_ID,
-    range: searchRange,
-  });
-  const updatedExistingNames = updatedSearchResponse.data.values?.slice(1).map(row => row[0].toLowerCase()); //exclude header row, convert to lowercase
-
-  for (const username of validMembers) {
-    if (!updatedExistingNames.includes(username)) {
-      // Add the user to the sheet and check for success
-      const appendRange = 'ClanIngots!A:B';
-      const appendSuccess = await appendRow(sheets, appendRange, [[username, 0]]);
-
-      // If the append was successful, log the addition
-      if (appendSuccess) {
-        await logChange(sheets, username, 0, 0, 'User Joined Server');
-        console.log(`Added ${username} to the sheet.`);
+    if (deleteResult) {
+      for (const rowIndex of rowsToDelete) {
+        const rowData = searchResponse.data.values[rowIndex];
+        console.log(`Removed ${rowData[0]} from the sheet (member left server).`);
+        await logChange(sheets, rowData[0], rowData[1], 0, 'User Left Server');
       }
     }
   }
+
+  for (const member of validMembers.values()) {
+    const existsInSheet = existingMembers.some((row) => row[2] === member.id);
+    if (!existsInSheet) {
+      const nickname = member.nickname || member.user.username;
+      const appendRange = 'ClanIngots!A:C';
+      const appendSuccess = await appendRow(sheets, appendRange, [[nickname, 0, member.id]]);
+
+      if (appendSuccess) {
+        await logChange(sheets, nickname, 0, 0, 'User Joined Server');
+        console.log(`Added ${nickname} to the sheet.`);
+      }
+    }
+  }
+  await sortSheet(sheets, 'ClanIngots', 0, 'ascending');
+  await sortSheet(sheets, 'ChangeLog', 1, 'descending');
 }
 
 module.exports = syncServerMembersWithSheet;
