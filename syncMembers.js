@@ -65,21 +65,29 @@ async function syncServerMembersWithSheet(guild) {
     }
   }
 
-  for (const member of validMembers.values()) {
-    const existsInSheet = existingMembers.some((row) => row[2] === member.id);
-    if (!existsInSheet) {
-      const nickname = member.nickname.toLowerCase() || member.user.username.toLowerCase();
-      const appendRange = 'ClanIngots!A:C';
-      const appendSuccess = await appendRow(sheets, appendRange, [[nickname, 0, member.id]]);
-
-      if (appendSuccess) {
-        await logChange(sheets, nickname, 0, 0, 'User Joined Server');
-        console.log(`Added ${nickname} to the sheet.`);
+    // Replace the loop starting from this line
+    for (const member of validMembers.values()) {
+      let memberFound = false;
+      for (const row of existingMembers) {
+        if (row[2] === member.id) {
+          memberFound = true;
+          break;
+        }
+      }
+  
+      if (!memberFound) {
+        const nickname = (member.nickname || member.user.username).toLowerCase();
+        const appendRange = 'ClanIngots!A:C';
+        const appendSuccess = await appendRow(sheets, appendRange, [[nickname, 0, member.id]]);
+        
+        if (appendSuccess) {
+          await logChange(sheets, nickname, 0, 0, 'User Joined Server');
+          console.log(`Added ${nickname} to the sheet.`);
+        }
       }
     }
+    await sortSheet(sheets, 'ClanIngots', 0, 'ascending');
+    await sortSheet(sheets, 'ChangeLog', 1, 'descending');
   }
-  await sortSheet(sheets, 'ClanIngots', 0, 'ascending');
-  await sortSheet(sheets, 'ChangeLog', 1, 'descending');
-}
-
-module.exports = syncServerMembersWithSheet;
+  
+  module.exports = syncServerMembersWithSheet;  
