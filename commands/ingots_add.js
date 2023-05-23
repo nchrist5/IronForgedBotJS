@@ -27,10 +27,17 @@ module.exports = {
 
       const newIngots = parseInt(cellInfo.value) + ingotsToAdd;
       const updateSuccess = await updateCellValue(sheets, 'B', cellInfo.rowIndex, newIngots);
+
+      const sixtyNine = Math.floor(Math.random()*100) === 69 ? true: false; //:smirk:
       if (cellInfo.value && updateSuccess) {
         const cmdCallingUser = await interaction.guild.members.fetch(interaction.user.id);
         await logChange(sheets, playerName, parseInt(cellInfo.value), newIngots, cmdCallingUser.nickname );
-        await interaction.editReply(`Added ${ingotsToAdd} ingots to ${playerName}. They now have ${newIngots} ingots <:Ingot:1106798940013215814>`);
+        if (sixtyNine) {
+          const getSixtyNine = ingotsToAdd - 69;
+          await interaction.editReply(`Added 69 ingots to ${playerName}.\n\n nice\n\nAlso added ${getSixtyNine} ingots for a total of ${ingotsToAdd}. They now have ${newIngots} ingots <:Ingot:1106798940013215814>`);
+        } else {
+          await interaction.editReply(`Added ${ingotsToAdd} ingots to ${playerName}. They now have ${newIngots} ingots <:Ingot:1106798940013215814>`);
+      }
       } else {
         await interaction.editReply(`No data found for player: ${playerName}.`);
       }
