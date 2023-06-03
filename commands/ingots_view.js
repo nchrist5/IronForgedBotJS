@@ -20,7 +20,7 @@ module.exports = {
 
     const cellInfo = await getCellValue(sheets, range, playerName.toLowerCase());
     if (cellInfo.value) {
-      await interaction.editReply(`${playerName} has ${parseInt(cellInfo.value)} ingots <:Ingot:1106798940013215814>`);
+      await interaction.editReply(`${playerName} has ${parseInt(cellInfo.value).toLocaleString("en-US")} ingots <:Ingot:1106798940013215814>`);
     } else {
       await interaction.editReply(`No data found for player: ${playerName}.`);
     }

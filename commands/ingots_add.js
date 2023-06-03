@@ -34,9 +34,9 @@ module.exports = {
         await logChange(sheets, playerName, parseInt(cellInfo.value), newIngots, cmdCallingUser.nickname );
         if (sixtyNine) {
           const getSixtyNine = ingotsToAdd - 69;
-          await interaction.editReply(`Added 69 ingots to ${playerName}.\n\n nice\n\nAlso added ${getSixtyNine} ingots for a total of ${ingotsToAdd}. They now have ${newIngots} ingots <:Ingot:1106798940013215814>`);
+          await interaction.editReply(`Added 69 ingots <:Ingot:1106798940013215814> to ${playerName}.\n\n nice\n\nAlso added ${getSixtyNine} ingots <:Ingot:1106798940013215814> for a total of ${ingotsToAdd.toLocaleString("en-US")}. They now have ${newIngots.toLocaleString("en-US")} ingots <:Ingot:1106798940013215814>`);
         } else {
-          await interaction.editReply(`Added ${ingotsToAdd} ingots to ${playerName}. They now have ${newIngots} ingots <:Ingot:1106798940013215814>`);
+          await interaction.editReply(`Added ${ingotsToAdd.toLocaleString("en-US")} ingots to ${playerName}. They now have ${newIngots.toLocaleString("en-US")} ingots <:Ingot:1106798940013215814>`);
       }
       } else {
         await interaction.editReply(`No data found for player: ${playerName}.`);
