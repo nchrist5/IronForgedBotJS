@@ -20,7 +20,7 @@ async function syncServerMembersWithSheet(guild) {
 
   await guild.members.fetch();
   const validMembers = guild.members.cache.filter((member) => {
-    const hasValidNickname = /^[a-z0-9_ -]+$/i.test(member.nickname);
+    const hasValidNickname = /^[a-z0-9_ -]+$/i.test(member.nickname || member.user.username);
     const hasMemberRole = member.roles.cache.some((role) => role.name === 'Member');
     return hasValidNickname && hasMemberRole;
   });
@@ -33,7 +33,7 @@ async function syncServerMembersWithSheet(guild) {
       const rowIndex = index + 1; //skip first row (header row)
       rowsToDelete.push(rowIndex);
     } else {
-      const currentNickname = member.nickname.toLowerCase();
+      const currentNickname = member.nickname ? member.nickname.toLowerCase() : member.user.username.toLowerCase();
 
       if (currentNickname.toLowerCase() !== row[0].toLowerCase()) {
         const rowIndex = index + 1; // Adjust index by +1 to account for header row
@@ -76,7 +76,7 @@ async function syncServerMembersWithSheet(guild) {
       }
   
       if (!memberFound) {
-        const nickname = member.nickname.toLowerCase();
+        const nickname = (member.nickname || member.user.username).toLowerCase();
         const appendRange = 'ClanIngots!A:C';
         const appendSuccess = await appendRow(sheets, appendRange, [[nickname, 0, member.id]]);
         
