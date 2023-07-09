@@ -267,12 +267,15 @@ module.exports = {
                 let skillPointsOutput = Object.entries(playerSkillsData)
                     .map(([key, value]) => `${key} : ${value}\n`)
                     .join('');
-              
+
                 let minigameOutput = Object.entries(playerMinigameData)
                     .map(([key, value]) => `${key} : ${value}\n`)
                     .join('');
 
-                let breakdownOutput = `---Points from Skills---\n${skillPointsOutput}Total Skill Points: ${skillPoints}\n\n---Points from Minigames & Bossing---\n${minigameOutput}Total Minigame & Bossing Points: ${minigamePoints}\n\nTotal Points: ${totalPoints}`;
+				let skillPointsOutPercent = Math.round((skillPoints/totalPoints)*100);
+				let minigameOutPercent = Math.round((minigamePoints/totalPoints)*100);
+
+                let breakdownOutput = `---Points from Skills---\n${skillPointsOutput}Total Skill Points: ${skillPoints} (${skillPointsOutPercent} of total)\n\n---Points from Minigames & Bossing---\n${minigameOutput}Total Minigame & Bossing Points: ${minigamePoints} (${minigameOutPercent} of total)\n\nTotal Points: ${totalPoints}`;
                 
                 fs.writeFile("./output_files/breakdown.txt", breakdownOutput, function (err) {
                     if (err) {
