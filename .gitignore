@@ -2,7 +2,7 @@
 secrets.json
 
 #OutputFiles
-output_files/
+.output_files/
 
 # Logs
 logs
