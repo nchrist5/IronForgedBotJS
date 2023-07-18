@@ -135,15 +135,15 @@ function getClanEmoji(totalPoints) {
     } else if (totalPoints >= 9000) {
         iconID = "Legend";
     } else if (totalPoints >= 5000) {
-        iconID = "Templar";
-    } else if (totalPoints >= 3000) {
         iconID = "Dragon";
-    } else if (totalPoints >= 1500) {
+    } else if (totalPoints >= 3000) {
         iconID = "Rune";
-    } else if (totalPoints >= 700) {
+    } else if (totalPoints >= 1500) {
         iconID = "Adamant";
-    } else {
+    } else if (totalPoints >= 700) {
         iconID = "Mithril";
+    } else {
+        iconID = "Iron";
     }
     return iconID;
 }
