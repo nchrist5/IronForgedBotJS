@@ -34,9 +34,9 @@ module.exports = {
         await logChange(sheets, playerName, parseInt(cellInfo.value), newIngots, cmdCallingUser.nickname );
         if (sixtyNine) {
           const getSixtyNine = ingotsToAdd - 69;
-          await interaction.editReply(`Added 69 ingots <:Ingot:1133172406538748024> to ${playerName}.\n\n nice\n\nAlso added ${getSixtyNine} ingots <:Ingot:1133172406538748024> for a total of ${ingotsToAdd.toLocaleString("en-US")}. They now have ${newIngots.toLocaleString("en-US")} ingots <:Ingot:1133172406538748024>`);
+          await interaction.editReply(`Added 69 ingots <:Ingot:1130689515372159136> to ${playerName}.\n\n nice\n\nAlso added ${getSixtyNine} ingots <:Ingot:1130689515372159136> for a total of ${ingotsToAdd.toLocaleString("en-US")}. They now have ${newIngots.toLocaleString("en-US")} ingots <:Ingot:1130689515372159136>`);
         } else {
-          await interaction.editReply(`Added ${ingotsToAdd.toLocaleString("en-US")} ingots to ${playerName}. They now have ${newIngots.toLocaleString("en-US")} ingots <:Ingot:1133172406538748024>`);
+          await interaction.editReply(`Added ${ingotsToAdd.toLocaleString("en-US")} ingots to ${playerName}. They now have ${newIngots.toLocaleString("en-US")} ingots <:Ingot:1130689515372159136>`);
       }
       } else {
         await interaction.editReply(`No data found for player: ${playerName}.`);
