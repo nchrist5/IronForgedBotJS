@@ -31,7 +31,7 @@ module.exports = {
         if (updateSuccess) {
           const cmdCallingUser = await interaction.guild.members.fetch(interaction.user.id);
           await logChange(sheets, playerName, previousIngots, newIngots, cmdCallingUser.nickname);
-          await interaction.editReply(`Updated ${playerName}'s ingots to ${newIngots.toLocaleString("en-US")} <:Ingot:1106798940013215814>\n(Previous Value: ${previousIngots.toLocaleString("en-US")} <:Ingot:1106798940013215814>)`);
+          await interaction.editReply(`Updated ${playerName}'s ingots to ${newIngots.toLocaleString("en-US")} <:Ingot:1133172406538748024>\n(Previous Value: ${previousIngots.toLocaleString("en-US")} <:Ingot:1133172406538748024>)`);
         }
       } else {
         await interaction.editReply(`No data found for player: ${playerName}.`);
