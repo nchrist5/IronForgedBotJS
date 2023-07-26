@@ -1,5 +1,5 @@
 const skillList = ["Attack", "Defence", "Strength", "Hitpoints", "Ranged", "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing", "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility", "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction"];
-const minigameList = ["Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Bounty Hunter (Legacy) - Hunter", "Bounty Hunter (Legacy) - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Artio", "Barrows Chests", "Bryophyta", "Callisto", "Calvar'ion", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Spindel", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"];
+const minigameList = ["League Points", "Bounty Hunter - Hunter", "Bounty Hunter - Rogue", "Bounty Hunter (Legacy) - Hunter", "Bounty Hunter (Legacy) - Rogue", "Clue Points (all)", "Clue Scrolls (beginner)", "Clue Scrolls (easy)", "Clue Scrolls (medium)", "Clue Scrolls (hard)", "Clue Scrolls (elite)", "Clue Scrolls (master)", "LMS - Rank", "PvP Arena - Rank", "Soul Wars Zeal", "Rifts closed", "Abyssal Sire", "Alchemical Hydra", "Artio", "Barrows Chests", "Bryophyta", "Callisto", "Calvar'ion", "Cerberus", "Chambers of Xeric", "Chambers of Xeric: Challenge Mode", "Chaos Elemental", "Chaos Fanatic", "Commander Zilyana", "Corporeal Beast", "Crazy Archaeologist", "Dagannoth Prime", "Dagannoth Rex", "Dagannoth Supreme", "Deranged Archaeologist", "Duke Sucellus", "General Graardor", "Giant Mole", "Grotesque Guardians", "Hespori", "Kalphite Queen", "King Black Dragon", "Kraken", "Kree'Arra", "K'ril Tsutsaroth", "Mimic", "Nex", "Nightmare", "Phosani's Nightmare", "Obor", "Phantom Muspah", "Sarachnis", "Scorpia", "Skotizo", "Spindel", "Tempoross", "The Gauntlet", "The Corrupted Gauntlet", "The Leviathan", "The Whisperer", "Theatre of Blood", "Theatre of Blood: Hard Mode", "Thermonuclear Smoke Devil", "Tombs of Amascut", "Tombs of Amascut: Expert Mode", "TzKal-Zuk", "TzTok-Jad", "Vardorvis", "Venenatis", "Vet'ion", "Vorkath", "Wintertodt", "Zalcano", "Zulrah"];
 
 //PRE-99 - Experience needed for 1 point
 const preMaxSkillValue = {
@@ -57,6 +57,7 @@ const postMaxSkillValue = {
 
 //Boss & Minigame KC needed for 1 point
 const bossPointValue = {
+    "League Points": 0,
     "Bounty Hunter - Hunter": 0,
     "Bounty Hunter - Rogue": 0,
     "Bounty Hunter (Legacy) - Hunter": 0,
@@ -90,6 +91,7 @@ const bossPointValue = {
     "Dagannoth Prime": 35,
     "Dagannoth Rex": 60,
     "Dagannoth Supreme": 35,
+    "Duke Sucellus": 0,
     "Deranged Archaeologist": 50,
     "General Graardor": 8,
     "Giant Mole": 50,
@@ -113,6 +115,8 @@ const bossPointValue = {
     "Tempoross": 7,
     "The Gauntlet": 10,
     "The Corrupted Gauntlet": 2.5,
+    "The Leviathan": 0,
+    "The Whisperer": 0,
     "Theatre of Blood": 0.4,
     "Theatre of Blood: Hard Mode": 0.25,
     "Thermonuclear Smoke Devil": 20,
@@ -120,6 +124,7 @@ const bossPointValue = {
     "Tombs of Amascut: Expert Mode": 0.5,
     "TzKal-Zuk": 0.1,
     "TzTok-Jad": 1,
+    "Vardorvis": 0,
     "Venenatis": 15,
     "Vet'ion": 15,
     "Vorkath": 12,

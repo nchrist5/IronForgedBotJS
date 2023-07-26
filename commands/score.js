@@ -35,7 +35,7 @@ module.exports = {
                 let minigamePoints = 0;
                 for (let i = 0; i < minigameList.length; i++) {
                     const minigameName = minigameList[i];
-                    const playerKCdata = jagexPayload[skillList.length + 1 + i].split(',');
+                    const playerKCdata = jagexPayload[skillList.length + i].split(',');
                     const kc = playerKCdata[1];
                     if (bossPointValue.hasOwnProperty(minigameName) && !isNaN(kc) && bossPointValue[minigameName] > 0 && kc / bossPointValue[minigameName] > 1.0) {
                         minigamePoints += Math.floor(kc / bossPointValue[minigameName]);
