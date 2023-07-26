@@ -47,7 +47,6 @@ client.on(Events.InteractionCreate, async interaction => {
         await command.execute(interaction);
     } catch (error) {
         console.error(error);
-        await interaction.editReply({ content: 'There was an error while executing this command!\n\nTell noodle I said: ' + error});
     }
 
     //sync members to spreadsheet
