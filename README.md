@@ -1,5 +1,5 @@
-# IronLandBotJS
-JS Code for Iron Land Bot 3.0
+# IronForgedBotJS
+JS Code for Iron Forged Discord Bot
   - Written Mythologies and ChatGPT
   - Revised into semi-readable code and not complete spaghetti by Noodlebonk
 
